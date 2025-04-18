@@ -1,0 +1,19 @@
+
+networks:
+  karma_network:
+    driver: bridge
+
+services:
+  apigateway:
+    image: kmgatewayadministracion:latest
+    container_name: KM.GateWay.Administracion
+    build:
+      context: .
+      dockerfile: KM.GateWay.Administracion/Dockerfile
+    ports:
+      - "7000:7000"
+    networks:
+      - karma_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:7000
