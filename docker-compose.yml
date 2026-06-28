@@ -1,11 +1,16 @@
+name: km-administracion-gateway
 
 networks:
-  karma_network:
-    driver: bridge
+  observability:
+    external: true
+    name: observability-network
+  karma:
+    external: true
+    name: karma-network
 
 services:
   apigateway:
-    image: kmgatewayadministracion:latest
+    image: km-gate:latest
     container_name: KM.GateWay.Administracion
     build:
       context: .
@@ -13,7 +18,10 @@ services:
     ports:
       - "7000:7000"
     networks:
-      - karma_network
+      - observability
+      - karma
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:7000
+      - LOKI_URL=http://loki:3100
+    restart: unless-stopped
