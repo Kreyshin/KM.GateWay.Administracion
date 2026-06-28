@@ -1,16 +1,29 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/v1/GestionSeguridad/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/v1/GestionSeguridad/Autenticacion/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7002
+          "Host": "km-gs-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/GestionSeguridad/Auth/{everything}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/v1/GestionSeguridad/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "km-gs-api",
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api/GestionSeguridad/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -29,7 +42,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/GestionRecursosHumanos/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
